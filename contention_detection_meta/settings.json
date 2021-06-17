@@ -1,0 +1,7 @@
+{
+    "data_file": "./data/memcached.csv",
+    "split_ratio" : 0.5,
+    "method": "VBEM",
+    "best_score_threshold": 0.6,
+    "max_components": 10
+}
