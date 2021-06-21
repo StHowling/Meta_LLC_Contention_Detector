@@ -48,8 +48,8 @@ def visualize_model(X,model):
     plt.show()
 
 
-class LLC_contention_detector(best_score_threshold=0.6,max_components=10):
-    def __init__(self):
+class LLC_contention_detector():
+    def __init__(self,best_score_threshold=0.6,max_components=10):
         self.threshold = best_score_threshold
         self.max_components = max_components
         self.select_func_map = {
@@ -149,7 +149,7 @@ class LLC_contention_detector(best_score_threshold=0.6,max_components=10):
                     best_MPKI = m
                     best_OCC = o
 
-        if f_avg < self.best_score_threshold:
+        if f_avg < self.threshold:
             best_MPKI = MPKI_candidates[-1]
             best_OCC = np.max(OCC_candidates)
 
@@ -171,7 +171,7 @@ class LLC_contention_detector(best_score_threshold=0.6,max_components=10):
                 f_avg = f1
                 best_CPI = c
 
-        if f_avg < self.best_score_threshold:
+        if f_avg < self.threshold:
             best_CPI = np.max(CPI_candidates)
 
         return best_CPI
