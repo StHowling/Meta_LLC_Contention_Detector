@@ -95,9 +95,29 @@ def compute_f1_score(p,r):
     
 def belongs(val,range_list):
     for r in range_list:
-        if val >= range[0] and val < range[1]:
+        if val >= r[0] and val < r[1]:
             return r
     
     return False
+
+def evaluate_classification(prediction,label):
+    assert prediction.shape == label.shape
+    TN, FN, FP, TP = 0, 0, 0, 0
+
+    for i in range(prediction.shape[0]):
+        if prediction[i] == 0:
+            if label[i] == 0:
+                TN += 1
+            else:
+                FN += 1
+        elif label[i] == 0:
+            FP += 1
+        else:
+            TP += 1
+
+    precision = TP / (TP + FP)
+    recall = TP / (TP + FN)
+    F1=compute_f1_score(precision,recall)
+    print("Presicion: %.2f\tRecall: %.2f\tF1-score: %.2f"%(precision,recall,F1))
 
 
